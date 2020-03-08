@@ -1,18 +1,26 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <vTable :users="users"></vTable>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import { mapActions, mapGetters } from 'vuex';
+import vTable from '../components/v-table.vue';
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld,
+    vTable,
+  },
+  computed: {
+    ...mapGetters(['users']),
+  },
+  methods: {
+    ...mapActions(['GET_USERS_FROM_API']),
+  },
+  beforeMount() {
+    this.GET_USERS_FROM_API();
   },
 };
 </script>
