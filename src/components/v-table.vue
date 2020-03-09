@@ -1,10 +1,10 @@
 <template>
     <div class="v-table">
       <div class="v-table__header">
-        <p>Name</p>
-        <p>Point earned</p>
-        <p>Point spent</p>
-        <p>Registration date</p>
+        <p @click="sortingMethod(selectedMethod = 'name')">Name</p>
+        <p @click="sortingMethod(selectedMethod = 'earned')">Point earned</p>
+        <p @click="sortingMethod(selectedMethod = 'spent')">Point spent</p>
+        <p @click="sortingMethod(selectedMethod = 'registration')">Registration date</p>
       </div>
       <div class="v-table__body">
         <vTableRow
@@ -35,6 +35,7 @@ export default {
     return {
       usersPerPage: 10,
       pageNumber: 1,
+      selectedMethod: '',
     };
   },
   components: {
@@ -57,6 +58,25 @@ export default {
     },
   },
   methods: {
+    sortingMethod() {
+      const mthd = this.selectedMethod;
+      switch (mthd) {
+        case 'name':
+          this.users.sort((a, b) => a.name.localeCompare(b.name));
+          break;
+        case 'earned':
+          this.users.sort((a, b) => a.points_earned - b.points_earned);
+          break;
+        case 'spent':
+          this.users.sort((a, b) => a.points_spent - b.points_spent);
+          break;
+        case 'registration':
+          this.users.sort((a, b) => a.registration_date.localeCompare(b.registration_date));
+          break;
+        default:
+          console.error('method is wrong');
+      }
+    },
     pageClick(page) {
       this.pageNumber = page;
     },
@@ -81,9 +101,12 @@ export default {
       display: flex;
       flex-direction: row;
       justify-content: center;
+      margin-top: 20px;
       &-page {
         padding: 5px;
         border: 1px solid black;
+        margin: 3px;
+        min-width: 20px;
         &_active {
           background: black;
           color: white;
