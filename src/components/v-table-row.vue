@@ -1,9 +1,9 @@
 <template>
     <div class="v-table-row">
-      <div class="v-table-row__item">{{ row.name }}</div>
-      <div class="v-table-row__item">{{ row.points_earned }}</div>
-      <div class="v-table-row__item">{{ row.points_spent }}</div>
-      <div class="v-table-row__item">{{ row.registration_date }}</div>
+      <div class="v-table-row__item v-table-row__item-name">{{ row.name }}</div>
+      <div class="v-table-row__item v-table-row__item-earned">{{ row.points_earned }}</div>
+      <div class="v-table-row__item v-table-row__item-spent">{{ row.points_spent }}</div>
+      <div class="v-table-row__item v-table-row__item-date">{{ row.registration_date }}</div>
     </div>
 </template>
 
